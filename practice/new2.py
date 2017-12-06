@@ -88,20 +88,20 @@
 #     print("나무를 %d번 찍습니다." %treehit)
 #     if(treehit == 10) : print("나무가 넘어갑니다")
 
-# class Housepark :
-#     lastname = "박"
-#
-# pey = Housepark()
-# print(pey.lastname)
-# Housepark.lastname = "창씨개명" #클래스의 요소를 그대로 받았을 때는 클래스의 요소가 바뀌면 자식들도 자동으로 바뀜
-# pes = Housepark()
-# print(pes.lastname)
-# print((pey.lastname))
-# pey.lastname = "박" #직접 값을 때려박으면 바뀌지 않음
-# print(pes.lastname)
-# print((pey.lastname))
-# Housepark.lastname = "창씨개명"
-# print((pey.lastname))
+class Housepark :
+    lastname = "박"
+
+pey = Housepark()
+print(pey.lastname)
+Housepark.lastname = "창씨개명" #클래스의 요소를 그대로 받았을 때는 클래스의 요소가 바뀌면 자식들도 자동으로 바뀜
+pes = Housepark()
+print(pes.lastname)
+print((pey.lastname))
+pey.lastname = "박" #직접 값을 때려박으면 바뀌지 않음
+print(pes.lastname)
+print((pey.lastname))
+Housepark.lastname = "창씨개명"
+print((pey.lastname))
 
 # class Housepark :
 #     lastname = '박'
@@ -140,13 +140,13 @@
 # print(sum_safe(a,b))
 # print(sum_safe('vb',1))
 
-class Bird :
-    def fly(self):
-        raise Birdshouldhavawings
-
-Jickparkguri = Bird()
-try :
-    Jickparkguri.fly()
-except NameError as x :
-    print(x)
+# class Bird :
+#     def fly(self):
+#         raise Birdshouldhavawings
+#
+# Jickparkguri = Bird()
+# try :
+#     Jickparkguri.fly()
+# except NameError as x :
+#     print(x)
 
