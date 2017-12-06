@@ -1,0 +1,27 @@
+c = input("Input : ")
+k = []
+print("Type of \"c = input(\"Input : \")\" : ", end='')
+print(type(c))
+
+for x in range(int(c)) :
+    k.append(x)
+print("Type of \"k.append(x)\" : ", end='')
+print(type(k))
+print("c : %s" %c)
+print("k : %s" %k)
+print(" Type of k[0] : %s" %type(k[0]))
+print("-----------------------------------------------------")
+aaa = list(input("Input : "))
+print("Type of \"aaa = list(input(\"dfd\"))\"")
+print(type(aaa))
+print("-----------------------------------------------------")
+print("for a in range(1,20) :")
+for a in range(1,20) :
+    print("Type of a : %d" %a, end= '')
+    print(type(a))
+    a = str(a)
+    print("Type of str(a) : %s" %a, end= '')
+    print(type(a))
+    a = list(a)
+    print("Type of list(a) : %s" %a, end= '')
+    print(type(a))
