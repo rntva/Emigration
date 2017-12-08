@@ -226,4 +226,3 @@ for x in range(fib) :
 #
 # print(input_list)
 
-#LCD Display    #값 2개를 한 줄에 입력받을 때 : s, n = input().split(' ') 이런 식으로 한다.

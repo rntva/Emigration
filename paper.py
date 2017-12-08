@@ -32,5 +32,5 @@
 # for x in range(3) :
 #     print(pickle.load(file))
 
-file = open("sample.txt", 'r')
-print(file.readlines()[-1])
+# file = open("sample.txt", 'r')
+# print(file.readlines()[-1])
