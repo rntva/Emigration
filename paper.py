@@ -35,4 +35,11 @@
 # file = open("sample.txt", 'r')
 # print(file.readlines()[-1])
 
-print("\\\\")
+# print("\\\\")
+
+A = input("아무거나 : ").split(' ')
+# print(A)
+
+for x in  range(len(A)) :
+    if sorted(A[x]) == ['0','1','2','3','4','5','6','7','8','9'] : print(True, end = ' ')
+    else : print(False, end = ' ')
