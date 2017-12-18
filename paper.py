@@ -50,38 +50,39 @@
 # # print(list_n, end = '')
 # # print(list_s)
 
-import pickle
-class test():
-    name = "한국it교육원"
-    address = "어느시 어느동 어디어디"
-    number = "542234232"
-    classes = "융햡, 과정, 몰라, 그래, 알아"
-a = test()
-b = test()
-b.name = b.name+"bbbbb"
-b.address = b.address+"bbbbbb"
-b.number = b.number+"bbbbbbb"
-b.classes = b.classes+",bbbbbb"
-c = test()
-c.name = c.name+"ccccc"
-c.address = c.address+"cccccc"
-c.number = c.number+"ccccccc"
-c.classes = c.classes+",cccccc"
-d = test()
-d.name = d.name+"ddddd"
-d.address = d.address+"dddddd"
-d.number = d.number+"ddddddd"
-d.classes = d.classes+",dddddd"
-last = test()
-last.name = "!@#$"
+# import pickle
+# class test():
+#     name = "한국it교육원"
+#     address = "어느시 어느동 어디어디"
+#     number = "542234232"
+#     classes = "융햡, 과정, 몰라, 그래, 알아"
+# a = test()
+# b = test()
+# b.name = b.name+"bbbbb"
+# b.address = b.address+"bbbbbb"
+# b.number = b.number+"bbbbbbb"
+# b.classes = b.classes+",bbbbbb"
+# c = test()
+# c.name = c.name+"ccccc"
+# c.address = c.address+"cccccc"
+# c.number = c.number+"ccccccc"
+# c.classes = c.classes+",cccccc"
+# d = test()
+# d.name = d.name+"ddddd"
+# d.address = d.address+"dddddd"
+# d.number = d.number+"ddddddd"
+# d.classes = d.classes+",dddddd"
+# last = test()
+# last.name = "!@#$"
+#
+# f = open("Academy.bin", 'wb')
+# pickle.dump(a, f)
+# pickle.dump(b, f)
+# pickle.dump(c, f)
+# pickle.dump(d, f)
+# pickle.dump(last,f)
+# f.close()
 
-f = open("test.bin", 'wb')
-pickle.dump(a, f)
-pickle.dump(b, f)
-pickle.dump(c, f)
-pickle.dump(d, f)
-pickle.dump(last,f)
-f.close()
 #
 # f = open("test.bin", 'rb')
 # e = pickle.load(f)
@@ -108,28 +109,36 @@ f.close()
 # f.close()
 
 
-f = open("test.bin", 'rb')
-ff = open("test_2.bin", 'wb')
-while 1 :
-    x = pickle.load(f)
-    if x.name == "!@#$" :
-        pickle.dump(x, ff)
-        break
-    elif x.name == "한국it교육원ccccc":
-        x.name = x.name + "awefdee"
-        x.address = x.address + "aefdfe"
-        pickle.dump(x, ff)
-    else : pickle.dump(x, ff)
-ff.close()
-ff = open("test_2.bin", 'rb')
-ff.seek(0)
-while 1 :
-    # print(pickle.load(ff))
-    x = pickle.load(ff)
-    if x.name == "!@#$" : break
-    else : print(x.name)
-f.close()
-ff.close()
+# f = open("test.bin", 'rb')
+# ff = open("test_2.bin", 'wb')
+# while 1 :
+#     x = pickle.load(f)
+#     if x.name == "!@#$" :
+#         pickle.dump(x, ff)
+#         break
+#     elif x.name == "한국it교육원ccccc":
+#         x.name = x.name + "awefdee"
+#         x.address = x.address + "aefdfe"
+#         pickle.dump(x, ff)
+#     else : pickle.dump(x, ff)
+# ff.close()
+# ff = open("test_2.bin", 'rb')
+# ff.seek(0)
+# while 1 :
+#     # print(pickle.load(ff))
+#     x = pickle.load(ff)
+#     if x.name == "!@#$" : break
+#     else : print(x.name)
+# f.close()
+# ff.close()
 
+import os
 
+file_name = os.listdir()
+print(file_name)
+print(str(file_name))
+for x in file_name :
+    ext = x.split('.')
+    if ext[-1] == "bin" :
+        print(ext[0])
 
