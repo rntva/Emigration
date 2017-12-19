@@ -132,13 +132,30 @@
 # f.close()
 # ff.close()
 
-import os
+# import os
+#
+# file_name = os.listdir()
+# print(file_name)
+# print(str(file_name))
+# for x in file_name :
+#     ext = x.split('.')
+#     if ext[-1] == "bin" :
+#         print(ext[0])
 
-file_name = os.listdir()
-print(file_name)
-print(str(file_name))
-for x in file_name :
-    ext = x.split('.')
-    if ext[-1] == "bin" :
-        print(ext[0])
+# curriculum_info_tutors = {}
+# curriculum_info_tutors_input = input("강사명과 전화번호 입력 : ").split(' ')
+# x = 0
+# while 1 :
+#     try :
+#         if x >= len(curriculum_info_tutors_input) : break
+#         else :
+#             curriculum_info_tutors[curriculum_info_tutors_input[x]] = str(curriculum_info_tutors_input[x+1])
+#             x += 2
+#     except KeyError as e :
+#         print(e)
+#         break
+# print(curriculum_info_tutors)
 
+file  = open("poll.txt", 'r')
+file.seek(0, 2)
+print(file.readline())

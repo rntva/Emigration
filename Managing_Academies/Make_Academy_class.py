@@ -11,7 +11,7 @@ class academy_information() :
 
 class academies() :
     def serch_academy_info(self):
-        order = input("검색 옵션을 설정해 주십시오.\n1.학원전체정보출력 2.학원명만출력 3.학원찾기 : ")
+        order = input("검색 옵션을 설정해 주십시오.\n1.학원전체정보출력 2.학원명만출력 3.학원찾기 4.학원삭제 : ")
         print()
         try :
             file = open("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
@@ -22,44 +22,48 @@ class academies() :
 
         if order == '1' :
             while 1 :
-                temp = pickle.load(file)
-                if temp.name == "!@#$" : break
-                else :
+                try :
+                    temp = pickle.load(file)
                     print("학원이름 : %s" %temp.name)
                     print("전화번호 : %s" %temp.number)
                     print("주소 : %s" %temp.address)
                     print("홈페이지 : %s" %temp.web_address)
                     print("교육과정 : %s" %temp.curriculums, end = "\n\n")
+                except : break
         elif order == '2' :
             numbering = 1
             while 1 :
-                temp = pickle.load(file)
-                if temp.name == "!@#$" : break
-                else :
+                try :
+                    temp = pickle.load(file)
                     print("%d.학원 : %s" %(numbering, temp.name))
                     numbering += 1
+                except : break
             print()
         elif order == '3' :
             search_academy_name = input("학원 이름을 치세요. : ")
             while 1 :
-                temp = pickle.load(file)
-                if temp.name == "!@#$" :
+                try :
+                    temp = pickle.load(file)
+                    if temp.name == search_academy_name :
+                        print("학원이름 : %s" % temp.name)
+                        print("전화번호 : %s" % temp.number)
+                        print("주소 : %s" % temp.address)
+                        print("홈페이지 : %s" % temp.web_address)
+                        print("교육과정 : %s" % temp.curriculums)
+                        break
+                except :
                     print("찾으시는 학원(%s)이 없습니다." %search_academy_name)
                     break
-                elif temp.name == search_academy_name :
-                    print("학원이름 : %s" % temp.name)
-                    print("전화번호 : %s" % temp.number)
-                    print("주소 : %s" % temp.address)
-                    print("홈페이지 : %s" % temp.web_address)
-                    print("교육과정 : %s" % temp.curriculums)
-                    break
             print()
+        elif order == '4' :
+            delet_dir_name = input("삭제하려는 학원 이름을 입력하십시오. : ")
+            try :
+                os.rmdir("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
+\\Academies\\"+delet_dir_name)
+            except OSError as e_msg :print(e_msg)
         file.close()
 
     def make_academy(self, instance) :
-#         file = open("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
-# \\Academies.bin", 'ab')
-#         pickle.dump(instance, file)
         try :
             if instance.name != "!@#$" :
                 os.mkdir("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
@@ -73,13 +77,102 @@ class academies() :
                         ffile = open("D:\Pycharm_projects\Emigration\Managing_Academies\Academies\
 \\"+instance.name+"\\"+x+".bin", 'wb')
                         ffile.close()
-
-            file = open("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
+            try :
+                file = open("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
+\\Academies.bin", 'rb')
+                file.close()
+                file = open("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
 \\Academies.bin", 'ab')
-            pickle.dump(instance, file)
-            file.close()
+                pickle.dump(instance, file)
+                file.close()
+            except FileNotFoundError :
+                file = open("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
+\\Academies.bin", 'wb')
+                pickle.dump(instance, file)
+                file.close()
+
         except FileExistsError :
             print("%s라는 학원은 이미 생성되었습니다." %instance.name)
+
+# class academy_information() :
+#     def __init__(self, name, number, address, web_address, curriculums) :
+#         self.name = name
+#         self.number = number
+#         self.address = address
+#         self.web_address = web_address
+#         self.curriculums = curriculums
+#
+# class academies() :
+#     def serch_academy_info(self):
+#         order = input("검색 옵션을 설정해 주십시오.\n1.학원전체정보출력 2.학원명만출력 3.학원찾기 : ")
+#         print()
+#         try :
+#             file = open("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
+# \\Academies.bin", 'rb')
+#         except FileNotFoundError :
+#             print("파일이 없습니다.")
+#             exit()
+#
+#         if order == '1' :
+#             while 1 :
+#                 temp = pickle.load(file)
+#                 if temp.name == "!@#$" : break
+#                 else :
+#                     print("학원이름 : %s" %temp.name)
+#                     print("전화번호 : %s" %temp.number)
+#                     print("주소 : %s" %temp.address)
+#                     print("홈페이지 : %s" %temp.web_address)
+#                     print("교육과정 : %s" %temp.curriculums, end = "\n\n")
+#         elif order == '2' :
+#             numbering = 1
+#             while 1 :
+#                 temp = pickle.load(file)
+#                 if temp.name == "!@#$" : break
+#                 else :
+#                     print("%d.학원 : %s" %(numbering, temp.name))
+#                     numbering += 1
+#             print()
+#         elif order == '3' :
+#             search_academy_name = input("학원 이름을 치세요. : ")
+#             while 1 :
+#                 temp = pickle.load(file)
+#                 if temp.name == "!@#$" :
+#                     print("찾으시는 학원(%s)이 없습니다." %search_academy_name)
+#                     break
+#                 elif temp.name == search_academy_name :
+#                     print("학원이름 : %s" % temp.name)
+#                     print("전화번호 : %s" % temp.number)
+#                     print("주소 : %s" % temp.address)
+#                     print("홈페이지 : %s" % temp.web_address)
+#                     print("교육과정 : %s" % temp.curriculums)
+#                     break
+#             print()
+#         file.close()
+#
+#     def make_academy(self, instance) :
+# #         file = open("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
+# # \\Academies.bin", 'ab')
+# #         pickle.dump(instance, file)
+#         try :
+#             if instance.name != "!@#$" :
+#                 os.mkdir("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
+# \\Academies\\"+instance.name)
+#                 for x in str(instance.curriculums).split(',') :
+#                     try :
+#                         ffile = open("D:\Pycharm_projects\Emigration\Managing_Academies\Academies\
+# \\"+instance.name+"\\"+x+".bin", 'rb')
+#                         ffile.close()
+#                     except FileNotFoundError :
+#                         ffile = open("D:\Pycharm_projects\Emigration\Managing_Academies\Academies\
+# \\"+instance.name+"\\"+x+".bin", 'wb')
+#                         ffile.close()
+#
+#             file = open("D:\\Pycharm_projects\\Emigration\\Managing_Academies\
+# \\Academies.bin", 'ab')
+#             pickle.dump(instance, file)
+#             file.close()
+#         except FileExistsError :
+#             print("%s라는 학원은 이미 생성되었습니다." %instance.name)
 
 # if __name__ == "__main__" :
 #     a = academy_information("한국it교육원a", "어느시 어느동 어느번지a", "0532456653a",\
