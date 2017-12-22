@@ -155,7 +155,7 @@
 #         print(e)
 #         break
 # print(curriculum_info_tutors)
-
-file  = open("poll.txt", 'r')
-file.seek(0, 2)
-print(file.readline())
+#
+# file  = open("poll.txt", 'r')
+# file.seek(0, 2)
+# print(file.readline())
