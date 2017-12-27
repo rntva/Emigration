@@ -159,3 +159,13 @@
 # file  = open("poll.txt", 'r')
 # file.seek(0, 2)
 # print(file.readline())
+
+a = "0.444"
+b = "0.445"
+if a > b : print("a > b")
+else : print("b > a")
+
+a = "0.445"
+b = "0.444"
+if a > b : print("a > b")
+else : print("b > a")
