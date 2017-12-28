@@ -160,12 +160,31 @@
 # file.seek(0, 2)
 # print(file.readline())
 
-a = "0.444"
-b = "0.445"
-if a > b : print("a > b")
-else : print("b > a")
+# a = "0.444"
+# b = "0.445"
+# if a > b : print("a > b")
+# else : print("b > a")
+#
+# a = "0.445"
+# b = "0.444"
+# if a > b : print("a > b")
+# else : print("b > a")
 
-a = "0.445"
-b = "0.444"
-if a > b : print("a > b")
-else : print("b > a")
+
+a = [1.0,2.2,3.0,4.5,5.5,6.4,7.1,8.5]
+
+# for x in a[:-1] :
+#     print(x)
+
+# print(type(a[2]))
+# a = list(map(int, a))
+# print(type(a[2]))
+# a = list(map(float, a))
+# print(type(a[2]))
+# b = max(a)
+# print(b)
+print(type(map(int,a)))
+print(map(int,a))
+print(list(map(int,a)))
+b = map(int,a)
+print(b[1])
