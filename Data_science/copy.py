@@ -15,3 +15,4 @@ with open("Demographic_Statistics_By_Zip_Code.csv", newline='') as file :
 
 primary_key = input("출력하려는 row의 primary_ksy값을 입력하십시오. : ")
 print(get_row_data(primary_key, 0))
+#
