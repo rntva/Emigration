@@ -73,22 +73,26 @@ temp_total, temp_length, average))
         return None
 
 def my_max(primary_key) :
-    if get_csv_row_instance(primary_key, 0)[-1] == "str" :
-        print("str타입은 my_min을 수행하지 안습니다.")
-        return None
+    try :
+        if get_csv_row_instance(primary_key, 0)[-1] == "str" :
+            print("str타입은 my_min을 수행하지 안습니다.")
+            return None
 
-    temp_max = max(get_csv_row_instance(primary_key, 0)[:-1])
-    print("%s의 최댓값은 %g" %(primary_key, temp_max))
-    return None
+        temp_max = max(get_csv_row_instance(primary_key, 0)[:-1])
+        print("%s의 최댓값은 %g" %(primary_key, temp_max))
+        return None
+    except :None
 
 def my_min(primary_key) :
-    if get_csv_row_instance(primary_key, 0)[-1] == "str" :
-        print("str타입은 my_min을 수행하지 안습니다.")
-        return None
+    try :
+        if get_csv_row_instance(primary_key, 0)[-1] == "str" :
+            print("str타입은 my_min을 수행하지 안습니다.")
+            return None
 
-    temp_min = min(get_csv_row_instance(primary_key, 0)[:-1])
-    print("%s의 최댓값은 %g" %(primary_key, temp_min))
-    return None
+        temp_min = min(get_csv_row_instance(primary_key, 0)[:-1])
+        print("%s의 최댓값은 %g" %(primary_key, temp_min))
+        return None
+    except : None
 
 def my_deviation(primary_key, printing = 1) :
     temp_deviation = []
@@ -125,9 +129,11 @@ def my_variation(primary_key, printing = 1) :
         return None
 
 def my_standard_deviation(primary_key) :
-    temp_variation = my_variation(primary_key, 0)
-    temp_stan_devi = math.sqrt(temp_variation)
-    print("%s : variation = %g, standard deviation = %6g" %(primary_key, temp_variation, temp_stan_devi))
+    try :
+        temp_variation = my_variation(primary_key, 0)
+        temp_stan_devi = math.sqrt(temp_variation)
+        print("%s : variation = %g, standard deviation = %6g" %(primary_key, temp_variation, temp_stan_devi))
+    except : None
 
 def my_ascendant(primary_key, printing = 1) :
     temp = get_csv_row_instance(primary_key, 0)[:-1]
