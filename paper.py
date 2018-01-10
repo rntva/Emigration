@@ -171,7 +171,7 @@
 # else : print("b > a")
 
 
-a = [1.0,2.2,3.0,4.5,5.5,6.4,7.1,8.5]
+# a = [1.0,2.2,3.0,4.5,5.5,6.4,7.1,8.5]
 
 # for x in a[:-1] :
 #     print(x)
@@ -183,8 +183,31 @@ a = [1.0,2.2,3.0,4.5,5.5,6.4,7.1,8.5]
 # print(type(a[2]))
 # b = max(a)
 # print(b)
-print(type(map(int,a)))
-print(map(int,a))
-print(list(map(int,a)))
-b = map(int,a)
-print(b[1])
+# print(type(map(int,a)))
+# print(map(int,a))
+# print(list(map(int,a)))
+# b = map(int,a)
+# print(b[1])
+
+# import time
+#
+# now = time.ctime()
+# print(type(now))
+# now = now.split(' ')
+# time = now[3].split(':')
+# print(now)
+# print(time)
+# temp1 = ""
+# temp2 = ""
+# for x in now[:3] :
+#     if x != ':': temp1 += x
+# for y in time : temp2 += y
+#
+# temp1 = temp1 + temp2 + now[-1]
+# print(temp1)
+
+def test(a) :
+    print(type(a))
+
+temp = 1
+test(str(temp))
