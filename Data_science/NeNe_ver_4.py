@@ -11,7 +11,7 @@ def make_dir(index) :
 
 def make_nene(dir_index, file_index, data_line) :
     with open(dir_name + dir_path + nene_dir + dir_index + dir_path + nene_file + file_index + e_csv ,\
-'w', newline='') as file1 :
+'a', newline='') as file1 :
        temp = csv.writer(file1)
        temp.writerow(data_line)
     return None
@@ -58,21 +58,20 @@ counting_data = 1
 counting_file = 1
 counting_dir = 1
 while 1 :
+    counting_file = int(counting_data / 100) + 1
+    if counting_data != 1:
+        try : make_dir(str(counting_dir))
+        except : pass
     if counting_data == 1 and counting_file == 1 and counting_dir == 1:
         make_dir(str(counting_dir))
-        for data_ilne in data[1:100] :
-            make_nene(str(counting_dir), counting_file, data_ilne)
+        for data_ilne in data[:101] :
+            make_nene(str(counting_dir), str(counting_file), data_ilne)
+            counting_data += 1
+    elif len(data) <= counting_data : break
+    elif counting_data >= 2:
+        make_nene(str(counting_dir), str(counting_file), data[counting_data-1])
+        counting_data += 1
 
-    elif :
-        make_dir(str(counting_file / 12 + 1))
-    elif counting_data <= 100 :
-        make_nene('1', str(counting), data_line)
-    elif counting % 100 == 1 :
-        ddir_index = (counting / 100 + 1)
-        os.mkdir(str(ddir_index))
-    else :
-        ddir_index = (counting / 100 + 1)
-        make_nene(str(ddir_index), str(counting), data_line)
 
 
 
@@ -103,4 +102,4 @@ while 1 :
 #         file.write('2')
 #     make_dir('1')
 #     make_nene('1', '1')
-# print("End")
+print("End")
