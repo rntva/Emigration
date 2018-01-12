@@ -5,11 +5,12 @@ from pandas import DataFrame
 result = []
 
 html = urllib.request.urlopen("http://movie.naver.com/movie/sdb/rank/rmovie.nhn")
-soupData = BeautifulSoup(html.read().decode("CP949"), "html.parser")
+# soupData = BeautifulSoup(html.read().decode("CP949"), "html.parser")
+soupData = BeautifulSoup(html, "html.parser")
 store_trs = soupData.find_all('tbody')
 store_rank = soupData.find_all('img')
 temp = store_rank[8:108]
-tr_tag = list(store_trs.strings)
+tr_tag = list(store_trs[0].strings)
 # k = temp[1].attrs['alt']
 rank = 1
 range = 1

@@ -6,8 +6,15 @@ from pandas import DataFrame
 import xml.etree.ElementTree as ET
 
 def make_dir(index) :
-    os.mkdir(dir_name + dir_path + nene_dir + index)
-    return None
+    try:
+        os.mkdir(dir_name + dir_path + nene_dir + index)
+        return index
+    except:
+        index = int(index)
+        index += 1
+        index = str(index)
+        make_dir(index)
+        return index
 
 def make_nene(dir_index, file_index, data_line) :
     with open(dir_name + dir_path + nene_dir + dir_index + dir_path + nene_file + file_index + e_csv ,\
@@ -26,22 +33,22 @@ dir_path = "\\"
 record_limit = 100
 file_limiet = 12
 
-# response = urllib.request.urlopen('http://nenechicken.com/subpage/where_list.asp?target_step2=%s&proc_type=step1&target_step1=%s'%(urllib.parse.quote('전체'),urllib.parse.quote('전체')))
-#
-# xml = response.read().decode('UTF-8')
-# root = ET.fromstring(xml)
-#
-# for element in root.findall('item'):
-#     store_name = element.findtext('aname1')
-#     store_sido = element.findtext('aname2')
-#     store_gungu = element.findtext('aname3')
-#     store_address = element.findtext('aname5')
-#
-#     result.append([store_name]+[store_sido]+[store_gungu]+[store_address])
-#
-# nene_table = DataFrame(result,columns=('sotre','sido','gungu','store_address'))
-# nene_table.to_csv('nene.csv',encoding="cp949",mode='w',index=True)
-#
+response = urllib.request.urlopen('http://nenechicken.com/subpage/where_list.asp?target_step2=%s&proc_type=step1&target_step1=%s'%(urllib.parse.quote('전체'),urllib.parse.quote('전체')))
+
+xml = response.read().decode('UTF-8')
+root = ET.fromstring(xml)
+
+for element in root.findall('item'):
+    store_name = element.findtext('aname1')
+    store_sido = element.findtext('aname2')
+    store_gungu = element.findtext('aname3')
+    store_address = element.findtext('aname5')
+
+    result.append([store_name]+[store_sido]+[store_gungu]+[store_address])
+
+nene_table = DataFrame(result,columns=('sotre','sido','gungu','store_address'))
+nene_table.to_csv('nene.csv',encoding="cp949",mode='w',index=True)
+
 
 try : os.mkdir(dir_name)
 except : pass
@@ -50,56 +57,22 @@ with open("nene.csv", newline='') as file :
     data = list(csv.reader(file))
 top_table = data[0]
 
-# with open("nene_write.csv", 'w', newline='') as file1 :
-#    temp = csv.writer(file1)
-#    temp.writerow(top_table)
-
-counting_data = 1
+counting_data = 0
 counting_file = 1
 counting_dir = 1
-while 1 :
-    counting_file = int(counting_data / 100) + 1
-    if counting_data != 1:
-        try : make_dir(str(counting_dir))
-        except : pass
-    if counting_data == 1 and counting_file == 1 and counting_dir == 1:
-        make_dir(str(counting_dir))
-        for data_ilne in data[:101] :
-            make_nene(str(counting_dir), str(counting_file), data_ilne)
-            counting_data += 1
-    elif len(data) <= counting_data : break
-    elif counting_data >= 2:
-        make_nene(str(counting_dir), str(counting_file), data[counting_data-1])
+
+if counting_data == 0 and counting_file == 1 and counting_dir == 1:
+    counting_dir = make_dir(str(counting_dir))
+    for data_ilne in data[:101]:
+        make_nene(str(counting_dir), str(counting_file), data_ilne)
         counting_data += 1
 
-
-
-
-
-# for data_ilne in data[1:] :
-#     csv.writer()
-#
-# try :
-#     with open("nene_index.txt", 'r') as file :
-#         file_index = file.readline()
-#         file_index = int(file_index)
-#         dir_index = int(file_index / record_limit)
-#         if file_index % record_limit != 0 : dir_index = str(dir_index+1)
-#         else : dir_index = str(dir_index)
-#         if file_index % record_limit == 1 and file_index >= (record_limit+1) :
-#             dir_index = str(dir_index)
-#             make_dir(dir_index)
-#         else : None
-#         file_index = str(file_index)
-#         make_nene(dir_index, file_index)
-#         file_index = int(file_index)
-#         file_index += 1
-#         file_index = str(file_index)
-#     with open("nene_index.txt", 'w') as file :
-#         file.write(file_index)
-# except FileNotFoundError :
-#     with open("nene_index.txt", 'w') as file :
-#         file.write('2')
-#     make_dir('1')
-#     make_nene('1', '1')
+while 1 :
+    if (counting_data - 1) % 100 == 0:
+        counting_file += 1
+        make_nene(str(counting_dir), str(counting_file), top_table)
+    if len(data) <= counting_data : break
+    elif counting_data >= 2:
+        make_nene(str(counting_dir), str(counting_file), data[counting_data])
+        counting_data += 1
 print("End")
