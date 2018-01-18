@@ -206,8 +206,14 @@
 # temp1 = temp1 + temp2 + now[-1]
 # print(temp1)
 
-def test(a) :
-    print(type(a))
+# def test(a) :
+#     print(type(a))
+#
+# temp = 1
+# test(str(temp))
 
-temp = 1
-test(str(temp))
+name = "name"
+a = {name:"e"}
+
+print(list(a.keys()))
+if list(a.keys()) != [] : print("된다")
