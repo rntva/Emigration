@@ -7,6 +7,10 @@ address = "address"
 class_info = "class_info"
 p_registration = "p_registration"
 attending_class = "attending_class"
+c_name = "c_name"
+c_tutor = "c_tutor"
+c_open = "c_open"
+c_close = "c_close"
 
 def input_student_info_form_of_dic(primary_index_list) :
     primary_key = primary_index_list.pop()
@@ -18,7 +22,7 @@ def input_student_info_form_of_dic(primary_index_list) :
         {
             primary_key:
                 {
-                    name: student_name, age: student_age, age: student_address,
+                    name: student_name, age: student_age, address: student_address,
                     class_info:
                         {
                             p_registration: student_past_registration_times,
@@ -59,16 +63,17 @@ def show_student_info(saved_primary_key_index, saved_primary_key) :
     temp_attending_class_keys_list = list(json_big_data[saved_primary_key_index][saved_primary_key][class_info][attending_class].keys())
     for y in temp_attending_class_keys_list:
         print(">>현재수강과목코드 : %s" % y)
-        print(">>현재수강강의이름 : %s" % json_big_data[saved_primary_key_index][saved_primary_key][class_info][attending_class][y]["c_name"])
-        print(">>현재수강강의교사 : %s" % json_big_data[saved_primary_key_index][saved_primary_key][class_info][attending_class][y]["c_tutor"])
-        print(">>현재수강강의개강 : %s" % json_big_data[saved_primary_key_index][saved_primary_key][class_info][attending_class][y]["c_open"])
-        print(">>현재수강강의종강 : %s" % json_big_data[saved_primary_key_index][saved_primary_key][class_info][attending_class][y]["c_close"])
+        print(">>현재수강강의이름 : %s" % json_big_data[saved_primary_key_index][saved_primary_key][class_info][attending_class][y][c_name])
+        print(">>현재수강강의교사 : %s" % json_big_data[saved_primary_key_index][saved_primary_key][class_info][attending_class][y][c_tutor])
+        print(">>현재수강강의개강 : %s" % json_big_data[saved_primary_key_index][saved_primary_key][class_info][attending_class][y][c_open])
+        print(">>현재수강강의종강 : %s" % json_big_data[saved_primary_key_index][saved_primary_key][class_info][attending_class][y][c_close])
         print()
 
 def get_student_primary_key_list() :
+    temp_student_primary_key_list = []
     for x in range(len(json_big_data)):
-        student_primary_key_list.append([x, list(json_big_data[x].keys())[0]])
-    return None
+        temp_student_primary_key_list.append([x, list(json_big_data[x].keys())[0]])
+    return temp_student_primary_key_list
 
 def show_all() :
     for x in student_primary_key_list :
@@ -76,11 +81,16 @@ def show_all() :
         print("------------------------------------------------------------------------")
     return None
 
-def search_with_id(id) :
+def search_with_student_primary_key(primary_key) :
     for x in student_primary_key_list :
-        if id == x[1] :
+        if primary_key == x[1] :
             show_student_info(x[0],x[1])
             return None
+
+# def check_codition(stored_data, inputted_data) :
+#     divide_stored_data = list(str(stored_data))
+#     divide_inputted_data = list(str(inputted_data))
+
 
 def search_with_name(student_name) :
     searched_student_name_list = []
@@ -147,10 +157,11 @@ def search_with_now_studying() :
 def search_with_opended_class(class_name) :
     searched_student_name_list = []
     for x in student_primary_key_list:
-        student_class_list = list(json_big_data[x[0]][x[1]][class_info][attending_class].keys())
-        for y in student_class_list :
-            if json_big_data[x[0]][x[1]][class_info][attending_class][y] == class_name :
+        student_class_code_list = list(json_big_data[x[0]][x[1]][class_info][attending_class].keys())
+        for y in student_class_code_list :
+            if json_big_data[x[0]][x[1]][class_info][attending_class][y][c_name] == class_name :
                 searched_student_name_list.append(x)
+                break
     if len(searched_student_name_list) == 1:
         show_student_info(searched_student_name_list[0][0],
                           searched_student_name_list[0][1])
@@ -161,6 +172,31 @@ def search_with_opended_class(class_name) :
         print("수강중인 학생이 없습니다.")
     return None
 
+def search_with_tutor(tutor_name) :
+    searched_student_name_list = []
+    for x in student_primary_key_list:
+        student_class_code_list = list(json_big_data[x[0]][x[1]][class_info][attending_class].keys())
+        for y in student_class_code_list:
+            if json_big_data[x[0]][x[1]][class_info][attending_class][y][c_tutor] == tutor_name:
+                searched_student_name_list.append(x)
+                break
+    if len(searched_student_name_list) == 1:
+        show_student_info(searched_student_name_list[0][0],
+                          searched_student_name_list[0][1])
+    elif len(searched_student_name_list) > 1:
+        for x in searched_student_name_list:
+            print(x[1])
+    elif searched_student_name_list == []:
+        print("수강중인 학생이 없습니다.")
+    return None
+
+def delet_with_student_primary_key(primary_key) :
+    for x in student_primary_key_list :
+        if primary_key == x[1] :
+            del(json_big_data[x[0]])
+            return None
+
+# def update_student_info(student_id) :
 
 
 
@@ -178,15 +214,19 @@ try :
         json_object = json.load(json_file)
         json_string = json.dumps(json_object)
         json_big_data = json.loads(json_string)
-        get_student_primary_key_list()
-        # show_all()
-        # search_with_id("ITT002")
+        student_primary_key_list = get_student_primary_key_list()
+        show_all()
+        # search_with_student_primary_key("ITT002")
         # search_with_name("김상엽")
         # search_with_age("ㅁ")
         # search_with_address("ㅁ")
         # search_with_past_registrarion("ㅂ")
         # search_with_now_studying()
-        search_with_opended_class('ㅁ')
+        # search_with_opended_class('a')
+        # search_with_tutor("이현구")
+        delet_with_student_primary_key("ITT002")
+        student_primary_key_list = get_student_primary_key_list()
+        show_all()
 
 
 except FileNotFoundError :
