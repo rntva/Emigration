@@ -212,8 +212,21 @@
 # temp = 1
 # test(str(temp))
 
-name = "name"
-a = {name:"e"}
+# name = "name"
+# a = {name:"e"}
+#
+# print(list(a.keys()))
+# if list(a.keys()) != [] : print("된다")
 
-print(list(a.keys()))
-if list(a.keys()) != [] : print("된다")
+# def list_pop(a) :
+#     a.pop()
+#
+# list_a = [1,2,3,4,5]
+# list_pop(list_a)
+# print(list_a)
+
+a = {"1":{"a":"aa", "b":"bb"},"2":"z"}
+print(a)
+del(a["1"]["a"])
+a["1"]["k"] = "kk"
+print(a)
