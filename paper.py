@@ -225,8 +225,14 @@
 # list_pop(list_a)
 # print(list_a)
 
-a = {"1":{"a":"aa", "b":"bb"},"2":"z"}
-print(a)
-del(a["1"]["a"])
-a["1"]["k"] = "kk"
-print(a)
+# a = {"1":{"a":"aa", "b":"bb"},"2":"z"}
+# print(a)
+# del(a["1"]["a"])
+# a["1"]["k"] = "kk"
+# print(a)
+
+a = [{'a':'1','b':'2','c':'3'}]
+a[0]['d'] ='4'
+print(list(a[0].keys()))
+
+
