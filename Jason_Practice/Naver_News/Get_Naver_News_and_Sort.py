@@ -54,12 +54,14 @@ def getPostData(post, jsonResult) :
 
 def main() :
     jsonResult = []
-    news_site_list = []
+    news_site_list = [[0, "total"]]
+    # news_site_list = []
+    length = 0
     news_site_list_dict = {}
     news_site_list_counting = []
 
     sNode = "news"
-    search_next = "가상화폐"
+    search_next = "이명박"
     display_count = 100
 
     jsonSearch = getNaverSearchResult(sNode, search_next, 1, display_count)
@@ -73,26 +75,57 @@ def main() :
         jsonSearch = getNaverSearchResult(sNode, search_next, nStart, display_count)
         index += 1
 ########################################################################################################
-    for x in jsonResult:
-        try : news_site_list.append(x["org_link"].split('/')[2])
+    for x in jsonResult :
+        try :
+            for y in range(len(news_site_list)) :
+                judge = 0
+                if x["org_link"].split('/')[2] == news_site_list[y][1] :
+                    news_site_list[y][0] += 1
+                    judge = 1
+                    break
+            if judge == 0 : news_site_list.append([1] + [x["org_link"].split('/')[2]])
+            length += 1
         except :
             print("\t\t<에러발생 전체 출력>")
             print("title : %s\noriginal_link : %s\ndescription : %s\npubDate : %s" %(x["title"], x["org_link"], x["description"], x["pDate"]))
-    news_site_set = set(news_site_list)
-    for x in news_site_set :
-        news_site_list_dict[x] = 0
+    news_site_list[0][0] = length
+    # news_site_set = set(news_site_list)
+    # for x in news_site_set :
+    #     news_site_list_dict[x] = 0
 
-    for x in news_site_set :
-        for y in news_site_list :
-            if x == y :  news_site_list_dict[x] += 1
-    for x in news_site_list_dict.keys() :
-        news_site_list_counting.append([news_site_list_dict[x]] + [x])
+    # for x in news_site_set :
+    #     for y in news_site_list :
+    #         if x == y :  news_site_list_dict[x] += 1
+    # for x in news_site_list_dict.keys() :
+    #     news_site_list_counting.append([news_site_list_dict[x]] + [x])
 
-    news_site_list_counting = list(reversed(sorted(news_site_list_counting)))
+    news_site_list = list(reversed(sorted(news_site_list)))
     print("<건수 별 뉴스 싸이트 내림차순 정리>".center(50))
-    for x in news_site_list_counting :
+    for x in news_site_list[1:] :
         print("싸이트 : 건수 => %s : %d" %(x[1], x[0]))
-    print("\t\t\t 총 건수 : %d" %len(news_site_list))
+    print("\t\t\t 총 건수 : %d" %news_site_list[0][0])
+
+    # for x in jsonResult:
+    #     try : news_site_list.append(x["org_link"].split('/')[2])
+    #     except :
+    #         print("\t\t<에러발생 전체 출력>")
+    #         print("title : %s\noriginal_link : %s\ndescription : %s\npubDate : %s" %(x["title"], x["org_link"], x["description"], x["pDate"]))
+    # news_site_set = set(news_site_list)
+    # for x in news_site_set :
+    #     news_site_list_dict[x] = 0
+    #
+    # for x in news_site_set :
+    #     for y in news_site_list :
+    #         if x == y :  news_site_list_dict[x] += 1
+    # for x in news_site_list_dict.keys() :
+    #     news_site_list_counting.append([news_site_list_dict[x]] + [x])
+    #
+    # news_site_list_counting = list(reversed(sorted(news_site_list_counting)))
+    # print("<건수 별 뉴스 싸이트 내림차순 정리>".center(50))
+    # for x in news_site_list_counting :
+    #     print("싸이트 : 건수 => %s : %d" %(x[1], x[0]))
+    # print("\t\t\t 총 건수 : %d" %len(news_site_list))
+
 ########################################################################################################
     with open("%s_naver_%s.json" %(search_next, sNode), 'w', encoding="utf8") as outfile :
         retJson = json.dumps(jsonResult, indent=4,sort_keys=True, ensure_ascii=False)
