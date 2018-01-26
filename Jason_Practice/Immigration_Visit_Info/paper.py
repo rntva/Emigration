@@ -304,3 +304,4 @@ count = """000=미상
 
 divide = count.split('\n')
 print(len(divide))
+print()
