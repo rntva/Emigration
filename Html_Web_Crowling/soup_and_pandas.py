@@ -6,7 +6,8 @@ max_page = 100
 result = []
 index = "index"
 for page_idx in range(1, max_page+1) :
-    Cheogajip_URL = 'http://www.Cheogajip.co.kr/establish02_02.html?page=%s&search=&keyword='%str(page_idx)
+    # Cheogajip_URL = 'http://www.Cheogajip.co.kr/establish02_02.html?page=%s&search=&keyword='%str(page_idx)
+    Cheogajip_URL = 'http://www.cheogajip.co.kr/bbs/board.php?page=%s&search=&keyword=' % str(page_idx)
     print(Cheogajip_URL)
 
     response = urllib.request.urlopen(Cheogajip_URL)
